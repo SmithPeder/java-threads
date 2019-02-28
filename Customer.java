@@ -32,6 +32,10 @@ public class Customer {
     return this.id;
   }
 
+  public String toString() {
+    return String.valueOf(this.id);
+  }
+
   // Return this customers orders in arrayform
   // This is to be used for statistics
   public int[] getNumberOfOrders() {

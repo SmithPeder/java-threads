@@ -11,19 +11,20 @@ public class Door implements Runnable {
 
   @Override
   public void run() {
-
+    SushiBar.write(Thread.currentThread().getName() + ": Door is live");
     // Continue to create customers while the bar is open
     // When the bar closes the loop will end and the run
     // method will return, closing the Door thread
     while(SushiBar.isOpen) {
 
       Customer newCustomer = new Customer();
+      SushiBar.write(Thread.currentThread().getName() + ": Door created customer " + newCustomer.getCustomerID());
 
       // Check if there is room in the waitingArea
       // Set the thread to wait if there is no room
       if (!waitingArea.isSpace()) {
         try {
-          wait();
+          waitingArea.wait();
         } catch (InterruptedException ex) { }
       }
 

@@ -12,20 +12,23 @@ public class Waitress implements Runnable {
 
   @Override
   public void run() {
+    SushiBar.write(Thread.currentThread().getName() + ": Waitress is live");
 
-    // This loop can't have a check if the bar is open, since there
-    // can be customers waiting after the bar closes its doors.
-    while (true) {
+    // This loop can't just have a check if the bar is open, since
+    // there can be customers waiting after the bar closes its doors.
+    while (SushiBar.isOpen || !waitingArea.isEmpty()) {
+
       // Keep getting new cutomers if there are some waiting
       // If there are none the waiter will wait()
-      if (waitingArea.isEmpty()) {
-        try {
-          wait();
-        } catch (InterruptedException ex) { }
-      }
-
+      synchronized(waitingArea) {
+        if (waitingArea.isEmpty()) {
+          try {
+            waitingArea.wait();
+          } catch (InterruptedException ex) { }
+        }
       // Get the next customer
       Customer current = waitingArea.next();
+      SushiBar.write(Thread.currentThread().getName() + ": Waitress fetched customer " + current);
 
       // Wait the required order time
       hold(orderWait);
@@ -35,7 +38,10 @@ public class Waitress implements Runnable {
 
       // Wait the required eating time
       hold(customerWait);
+      }
+
     }
+    SushiBar.write(Thread.currentThread().getName() + ": Waitress is dead");
   }
 
   private void hold(int hold) {
