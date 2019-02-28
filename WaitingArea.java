@@ -54,6 +54,18 @@ public class WaitingArea {
     synchedWaitressList.remove(w);
   }
 
+  // Add door to list of active doors
+  // The door will then produce customers
+  public void addDoor(Door d) {
+    synchedDoorList.add(d);
+  }
+
+  // Remove door from list of acitve doors
+  // The door will no longer create customers
+  public void removeDoor(Door d) {
+    synchedDoorList.remove(d);
+  }
+
   // Returns true if there is room left in the waitingArea
   public boolean isSpace() {
     return this.synchedWaitingList.size() != this.maxSize;
