@@ -22,9 +22,9 @@ public class SushiBar {
 
   //Variables related to statistics
   public static SynchronizedInteger customerCounter;
+  public static SynchronizedInteger totalOrders;
   public static SynchronizedInteger servedOrders;
   public static SynchronizedInteger takeawayOrders;
-  public static SynchronizedInteger totalOrders;
 
   // Custom color output
   public static Output OUT = new Output();
