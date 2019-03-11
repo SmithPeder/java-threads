@@ -22,24 +22,37 @@ public class WaitingArea {
   }
 
   // Add the customer to the back of Queue
-  // The Door has already checked that there is room
   public synchronized void enter(Customer customer) {
+    if(!isSpace()) {
+      try {
+        SushiBar.OUT.door(Thread.currentThread().getName() + ": Door is waiting");
+        wait();
+      } catch (InterruptedException ex) { }
+    }
+
     // Add them to the end of the list
     this.waitingList.add(customer);
-    SushiBar.write(Thread.currentThread().getName() + ": Customer " + customer + " is now waiting");
+    SushiBar.OUT.waiting(Thread.currentThread().getName() + ": Customer " + customer + " is now waiting");
 
-    System.out.println("Waiting area: " + Arrays.toString(waitingList.toArray()));
+    SushiBar.OUT.waiting("Waiting area: " + Arrays.toString(waitingList.toArray()));
 
-    // Notify all waiting waitresses that a new customer has arrived
+    // Wake up everything
     notifyAll();
   }
 
   // Get the customer at the front of line
   public synchronized Customer next() {
+    while (isEmpty()) {
+      try {
+        SushiBar.OUT.waitress(Thread.currentThread().getName() + ": Waitress is waiting");
+        wait();
+      } catch (InterruptedException ex) { }
+    }
+
     Customer next = this.waitingList.remove(0);
 
-    // Nofify all doors that there is space
-    notifyAll();
+    // Wake up everything
+    this.notifyAll();
     return next;
   }
 

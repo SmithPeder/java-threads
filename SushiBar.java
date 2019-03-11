@@ -26,6 +26,8 @@ public class SushiBar {
   public static SynchronizedInteger takeawayOrders;
   public static SynchronizedInteger totalOrders;
 
+  public static Output OUT = new Output();
+
 
   public static void main(String[] args) {
     log = new File(path + "log.txt");
@@ -38,17 +40,16 @@ public class SushiBar {
 
     // Create a new clock
     Clock c = new Clock(20);
-    SushiBar.write(Thread.currentThread().getName() + ": Clock is live");
 
     // Shared resource
     WaitingArea waitingArea = new WaitingArea(waitingAreaCapacity);
-    SushiBar.write(Thread.currentThread().getName() + ": WaitingArea is live");
+    OUT.waiting(Thread.currentThread().getName() + ": WaitingArea is live");
 
-    // Create waitresses
+    // Create waitresses and add them to the waitingArea
     for(int i = 0; i < waitressCount; i++) {
       Waitress waitress = new Waitress(waitingArea);
-      waitingArea.addWaitress(waitress);
       (new Thread(waitress)).start();
+      waitingArea.addWaitress(waitress);
     }
 
     // Create a door
@@ -59,8 +60,6 @@ public class SushiBar {
 
   //Writes actions in the log file and console
   public static void write(String str) {
-    System.out.println(str);
-    /*
     try {
       FileWriter fw = new FileWriter(log.getAbsoluteFile(), true);
       BufferedWriter bw = new BufferedWriter(fw);
@@ -71,6 +70,5 @@ public class SushiBar {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    */
   }
 }

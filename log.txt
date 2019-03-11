@@ -6,3 +6,39 @@
 15:53:42:422, Thread-7: Waitress is live
 15:53:42:422, Thread-3: Waitress is live
 15:53:42:422, Thread-1: Waitress is live
+12:46:22:328, Thread-6: Waitress is live
+12:46:22:328, Thread-8: Waitress is live
+12:46:22:328, Thread-9: Door is live
+12:46:22:328, Thread-5: Waitress is live
+12:46:22:328, Thread-3: Waitress is live
+12:46:22:328, Thread-1: Waitress is live
+12:46:22:328, Thread-4: Waitress is live
+12:46:22:328, Thread-2: Waitress is live
+12:46:22:328, Thread-7: Waitress is live
+12:46:22:422, Thread-9: Door created customer 0
+12:46:22:423, Thread-9: Customer 0 is now waiting
+12:46:22:425, Thread-5: Waitress fetched customer 0
+12:46:22:525, Thread-9: Door created customer 1
+12:46:24:477, Thread-9: Customer 1 is now waiting
+12:46:24:479, Thread-3: Waitress fetched customer 1
+12:46:24:580, Thread-9: Door created customer 2
+12:46:26:543, Thread-9: Customer 2 is now waiting
+12:46:26:544, Thread-5: Waitress fetched customer 2
+12:46:26:644, Thread-9: Door created customer 3
+12:46:28:604, Thread-9: Customer 3 is now waiting
+12:46:28:606, Thread-3: Waitress fetched customer 3
+12:46:28:710, Thread-9: Door created customer 4
+12:46:30:661, Thread-9: Customer 4 is now waiting
+12:46:30:661, Thread-5: Waitress fetched customer 4
+12:46:30:765, Thread-9: Door created customer 5
+12:46:32:720, Thread-9: Customer 5 is now waiting
+12:46:32:721, Thread-3: Waitress fetched customer 5
+12:46:32:822, Thread-9: Door created customer 6
+12:55:43:305, main: Waitress is working the floor
+12:55:43:352, main: Waitress is working the floor
+12:55:43:352, main: Waitress is working the floor
+12:55:43:353, main: Waitress is working the floor
+12:55:43:353, main: Waitress is working the floor
+12:55:43:354, main: Waitress is working the floor
+12:55:43:354, main: Waitress is working the floor
+12:55:43:355, main: Waitress is working the floor
