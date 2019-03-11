@@ -13,7 +13,7 @@ public class Output {
     System.out.println((char)27 + "[32m" + s);
   }
 
-  void customer(String s) {
+  void red(String s) {
     System.out.println((char)27 + "[31m" + s);
   }
 

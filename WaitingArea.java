@@ -34,7 +34,7 @@ public class WaitingArea {
     this.waitingList.add(customer);
     SushiBar.OUT.waiting(Thread.currentThread().getName() + ": Customer " + customer + " is now waiting");
 
-    SushiBar.OUT.waiting("Waiting area: " + Arrays.toString(waitingList.toArray()));
+    SushiBar.OUT.red("Waiting area: " + Arrays.toString(waitingList.toArray()));
 
     // Wake up everything
     notifyAll();

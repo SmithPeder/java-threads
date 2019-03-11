@@ -26,21 +26,21 @@ public class Waitress implements Runnable {
       }
 
       // Wait the required order time
-      hold(orderWait);
+      hold(orderWait, "to order");
 
       // Take the order
       current.order();
 
       // Wait the required eating time
-      hold(customerWait);
+      hold(customerWait, "to eat");
 
     }
     SushiBar.OUT.waitress(Thread.currentThread().getName() + ": Waitress is dead");
   }
 
-  private void hold(int hold) {
+  private void hold(int hold, String type) {
     try {
-      SushiBar.OUT.waitress(Thread.currentThread().getName() + ": Waitress is serving");
+      SushiBar.OUT.waitress(Thread.currentThread().getName() + ": Waitress is waiting for customer to " + type);
       Thread.sleep(hold);
     } catch (InterruptedException ex) { }
   }

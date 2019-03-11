@@ -26,6 +26,7 @@ public class SushiBar {
   public static SynchronizedInteger takeawayOrders;
   public static SynchronizedInteger totalOrders;
 
+  // Custom color output
   public static Output OUT = new Output();
 
 

@@ -10,12 +10,14 @@ public class Clock {
   public Clock(int seconds) {
     timer = new Timer();  //At this line a new Thread will be created
     timer.schedule(new RemindTask(), seconds * 1000); //delay in milliseconds
+    SushiBar.OUT.clock("=================OPEN=================");
   }
 
   class RemindTask extends TimerTask {
     public void run() {
       SushiBar.isOpen = false; //prevents creating new customers
       timer.cancel();
+      SushiBar.OUT.clock("=================CLOSED=================");
     }
   }
 
