@@ -8,9 +8,9 @@ public class WaitingArea {
   private int maxSize;
 
   // Keep track of other threads
-  private List<Door> doorList;
-  private List<Customer> waitingList;
-  private List<Waitress> waitressList;
+  private ArrayList<Door> doorList;
+  private ArrayList<Customer> waitingList;
+  private ArrayList<Thread> waitressList;
 
   public WaitingArea(int maxSize) {
     this.maxSize = maxSize;
@@ -18,7 +18,7 @@ public class WaitingArea {
     // Init synched lists
     doorList = new ArrayList<Door>();
     waitingList = new ArrayList<Customer>();
-    waitressList = new ArrayList<Waitress>();
+    waitressList = new ArrayList<Thread>();
   }
 
   // Add the customer to the back of Queue
@@ -32,6 +32,7 @@ public class WaitingArea {
 
     // Add them to the end of the list
     this.waitingList.add(customer);
+    SushiBar.write(Thread.currentThread().getName() + ": Customer " + customer.getCustomerID() + " is waiting.");
     SushiBar.OUT.waiting(Thread.currentThread().getName() + ": Customer " + customer + " is now waiting");
 
     SushiBar.OUT.red("Waiting area: " + Arrays.toString(waitingList.toArray()));
@@ -50,6 +51,7 @@ public class WaitingArea {
     }
 
     Customer next = this.waitingList.remove(0);
+    SushiBar.write(Thread.currentThread().getName() + ": Customer " + next.getCustomerID() + " is fetched.");
 
     // Wake up everything
     this.notifyAll();
@@ -58,13 +60,13 @@ public class WaitingArea {
 
   // Add waitress to list `on-call` waittresses
   // The waitress will then recive info regarding the waitingarea
-  public void addWaitress(Waitress w) {
+  public void addWaitress(Thread w) {
     waitressList.add(w);
   }
 
   // Remove waitress from list `on-call` waittresses
   // The waitress will no longer recive info regarding the waitingarea
-  public void removeWaitress(Waitress w) {
+  public void removeWaitress(Thread w) {
     waitressList.remove(w);
   }
 
@@ -78,6 +80,10 @@ public class WaitingArea {
   // The door will no longer create customers
   public void removeDoor(Door d) {
     doorList.remove(d);
+  }
+
+  public ArrayList<Thread> getWList() {
+    return waitressList;
   }
 
   // Returns true if there is room left in the waitingArea

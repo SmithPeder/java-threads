@@ -23,8 +23,8 @@ public class Customer {
 
     // Increment the shared variables
     SushiBar.totalOrders.add(x);
-    SushiBar.servedOrders.add(x);
-    SushiBar.takeawayOrders.add(x);
+    SushiBar.servedOrders.add(y);
+    SushiBar.takeawayOrders.add(z);
   }
 
   public int getCustomerID() {

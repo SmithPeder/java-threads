@@ -1,5 +1,4 @@
 
-
 public class Waitress implements Runnable {
 
   private WaitingArea waitingArea;
@@ -32,7 +31,9 @@ public class Waitress implements Runnable {
       current.order();
 
       // Wait the required eating time
+      SushiBar.write(Thread.currentThread().getName() + ": Customer " + current.getCustomerID() + " is eating.");
       hold(customerWait, "to eat");
+      SushiBar.write(Thread.currentThread().getName() + ": Customer " + current.getCustomerID() + " is leaving.");
 
     }
     SushiBar.OUT.waitress(Thread.currentThread().getName() + ": Waitress is dead");

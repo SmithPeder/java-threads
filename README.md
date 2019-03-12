@@ -2,14 +2,7 @@
 
 > [Practical Assignment](https://github.com/SmithPeder/java-threads/tree/master/lib)
 
-## Explanation
-
-> Overview of flow
-
 ![](SushiBar.png)
-
-### Main Classes
-
 
 #### Customer
 
@@ -45,3 +38,27 @@ The object has to main function as you can see in the figure. `enter()` takes ne
 
 #### Output
 `Output.java` helps prints to the terminal in different colors, to help differentiate what output comes from what thread.
+
+### Wait(), nofify(), nofifyAll()
+
+`wait()` sets the current thread (the one running the line) to wait indefinitely.
+
+`nofity()` wakes up a thread that is set to wait().
+
+`notifyAll()` wakes up all threads set to sleep by wait().
+
+### Shared variables
+
+All the shared variables are managed by using the `SynchronizedInteger` class. As all the method are declared using the `synchronized` keyword, only one Thread can access it at once.
+
+List of shared variables.
+  - SynchronizedInteger customerCounter;
+  - SynchronizedInteger totalOrders;
+  - SynchronizedInteger servedOrders;
+  - SynchronizedInteger takeawayOrders;
+
+There are also other shared resources. More specifically the shared `ArrayList` that holds `Customers`. This used by both the `Waitress` threads and the `Door` threads. This shared resource is also managed by declaring the functions are `synchronized`.
+
+### Reporting final statistics
+
+This is done by the main thread. When we `join()` all the waitresses, main is set to wait for them. So it will run the last bit of code when they terminate.

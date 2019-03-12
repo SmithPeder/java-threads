@@ -3,6 +3,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
 
 public class SushiBar {
 
@@ -40,7 +44,7 @@ public class SushiBar {
     takeawayOrders = new SynchronizedInteger(0);
 
     // Create a new clock
-    Clock c = new Clock(20);
+    Clock c = new Clock(duration);
 
     // Shared resource
     WaitingArea waitingArea = new WaitingArea(waitingAreaCapacity);
@@ -49,14 +53,27 @@ public class SushiBar {
     // Create waitresses and add them to the waitingArea
     for(int i = 0; i < waitressCount; i++) {
       Waitress waitress = new Waitress(waitingArea);
-      (new Thread(waitress)).start();
-      waitingArea.addWaitress(waitress);
+      Thread t = new Thread(waitress);
+      t.start();
+      waitingArea.addWaitress(t);
     }
 
     // Create a door
     Door door = new Door(waitingArea);
     waitingArea.addDoor(door);
     (new Thread(door)).start();
+
+    ArrayList<Thread> waitressList = waitingArea.getWList();
+    for(Thread w: waitressList) {
+      try {
+        w.join();
+      } catch (InterruptedException e) {}
+    }
+
+    SushiBar.write(Thread.currentThread().getName() + "Total number of orders:" + totalOrders.get());
+    SushiBar.write(Thread.currentThread().getName() + "Total number of takeaway orders: " + takeawayOrders.get());
+    SushiBar.write(Thread.currentThread().getName() + "Total number of served orders:" + servedOrders.get());
+    SushiBar.write(Thread.currentThread().getName() + "Total number of customer: " + customerCounter.get());
   }
 
   //Writes actions in the log file and console
@@ -66,7 +83,7 @@ public class SushiBar {
       BufferedWriter bw = new BufferedWriter(fw);
       bw.write(Clock.getTime() + ", " + str + "\n");
       bw.close();
-      System.out.println(Clock.getTime() + ", " + str);
+      // System.out.println(Clock.getTime() + ", " + str);
     } catch (IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

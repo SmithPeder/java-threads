@@ -10,6 +10,7 @@ public class Clock {
   public Clock(int seconds) {
     timer = new Timer();  //At this line a new Thread will be created
     timer.schedule(new RemindTask(), seconds * 1000); //delay in milliseconds
+    SushiBar.write("THE SHOP IS NOW OPEN");
     SushiBar.OUT.clock("=================OPEN=================");
   }
 
@@ -18,6 +19,7 @@ public class Clock {
       SushiBar.isOpen = false; //prevents creating new customers
       timer.cancel();
       SushiBar.OUT.clock("=================CLOSED=================");
+      SushiBar.write("NO MORE CUSTOMERS - THE SHOP IS CLOSED NOW");
     }
   }
 
